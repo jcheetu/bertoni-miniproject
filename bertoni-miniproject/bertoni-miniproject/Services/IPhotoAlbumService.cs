@@ -12,8 +12,8 @@ namespace bertoni_miniproject.Services
     public interface IPhotoAlbumService
     {
 
-        List<Album> GetPhotoAlbums();
-        List<Photo> GetPhotos(int albumId);
-        List<Comment> GetComments(int photoId);
+        List<AlbumDto> GetPhotoAlbums();
+        List<PhotoDto> GetPhotos(int albumId);
+        List<CommentDto> GetComments(int photoId);
     }
 }

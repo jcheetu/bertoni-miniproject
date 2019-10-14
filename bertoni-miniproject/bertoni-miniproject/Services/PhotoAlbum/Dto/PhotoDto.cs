@@ -2,7 +2,7 @@
 
 namespace bertoni_miniproject.Services.Dto
 {
-    public class Photo
+    public class PhotoDto
     {
         public string Title { get; set; }
         public int AlbumId { get; set; }

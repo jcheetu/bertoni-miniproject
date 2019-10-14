@@ -21,6 +21,11 @@ namespace bertoni_miniproject.Controllers
 
         public ActionResult Albums()
         {
+            //return Json(_photoAlbumService.GetPhotoAlbums(), JsonRequestBehavior.AllowGet);
+            return View();
+        }
+        public ActionResult GetAlbums()
+        {
             return Json(_photoAlbumService.GetPhotoAlbums(), JsonRequestBehavior.AllowGet);
         }
         public ActionResult Photos(int albumId)

@@ -2,7 +2,7 @@
 
 namespace bertoni_miniproject.Services.Dto
 {
-    public class Comment
+    public class CommentDto
     {
         public string Name { get; set; }
         public int PostId { get; set; }

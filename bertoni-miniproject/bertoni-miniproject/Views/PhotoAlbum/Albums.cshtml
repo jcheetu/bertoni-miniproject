@@ -1,0 +1,85 @@
+﻿@{
+    ViewBag.Title = "Photo Album";
+}
+
+<h2>@ViewBag.Title.</h2>
+<h3>@ViewBag.Message</h3>
+
+<div class="col-md-12">
+    <div class="panel panel-primary">
+
+        <div class="panel-body">
+            <div class="form-group col-md-5">
+                <label>Album Name</label>
+                <select id="drdAlbums" onchange="LoadPhotos(this[this.selectedIndex].value);">
+                    <option>Select Album</option>
+                </select>
+            </div>
+        </div>
+    </div><hr />
+    <table id="tblImages" class="table table-bordered table-striped table-responsive table-hover">
+
+        <tbody></tbody>
+    </table>
+    <table id="tblCommments" class="table table-bordered table-striped table-responsive table-hover">
+
+        <tbody></tbody>
+    </table>
+</div>
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        debugger;
+        $.ajax({
+            url: "/PhotoAlbum/GetAlbums",
+            type: "GET",
+            contentType: "application/json; charset=utf-8",
+            datatype: JSON,
+            success: function (result) {
+                $(result).each(function () {
+                    $("#drdAlbums").append($("<option></option>").val(this.id).html(this.Title));
+                });
+            },
+            error: function (data) { }
+        });
+
+
+    });
+    function LoadPhotos(id) {
+        debugger;
+        $.ajax({
+            url: "/PhotoAlbum/Photos?albumid=" + id,
+            type: "GET",
+            contentType: "application/json; charset=utf-8",
+            datatype: JSON,
+            data: { albumId: id },
+            success: function (result) {
+                $("#tblImages").html('<thead><tr><th align="left" class="productth">ID</th><th align="left" class="productth">Title</th><th align="left" class="productth">Image</th> <th align="left" class="productth">See Comments</th></tr></thead>');
+                $(result).each(function () {
+                    $("#tblImages").append($('<tr><td align="left" class="productth"><a href="#" onclick="LoadComments(' + this.Id + ')">' + this.Id + '</a></td><td align = "left" class= "productth" ><a href="' + this.Url + '">' + this.Title + '</a></td ><td align="left" class="productth"><img src=' + this.ThumbnailUrl + ' /></td><td align="left" class="productth"><a onclick="LoadComments(' + this.Id + ')" style="cursor:pointer">See Comments</a></td></tr>'));
+                });
+            },
+            error: function (data) { }
+        });
+    }
+    function LoadComments(id) {
+        $.ajax({
+            url: "/PhotoAlbum/Comments?photoId=" + id,
+            type: "GET",
+            contentType: "application/json; charset=utf-8",
+            datatype: JSON,
+            data: { albumId: id },
+            success: function (result) {
+                $(result).each(function () {
+                    $("#tblCommments").html('<thead><tr><th align="left" class="productth">ID</th><th align="left" class="productth">Name</th><th align="left" class="productth">Body</th></tr> </thead>');
+                    $(result).each(function () {
+                        $("#tblCommments").append($('<tr><td align="left" class="productth">' + this.Id + '</td><td align = "left" class= "productth" >' + this.Name + '(' + this.Email + ')' + '</td ><td align="left" class="productth">' + this.Body + '</td></tr>'));
+                    });
+                });
+                $("html, body").animate({ scrollTop: $(document).height() }, "slow");
+            },
+            error: function (data) { }
+        });
+    }
+</script>  

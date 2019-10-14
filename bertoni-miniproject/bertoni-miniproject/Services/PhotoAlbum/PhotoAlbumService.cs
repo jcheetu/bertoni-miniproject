@@ -15,7 +15,7 @@ namespace bertoni_miniproject.Services
         private string Host = ConfigurationManager.AppSettings["PhotoAlbumAPIHost"];
 
 
-        public List<Album> GetPhotoAlbums()
+        public List<AlbumDto> GetPhotoAlbums()
         {
             string url = Host + ConfigurationManager.AppSettings["Albums"]; ;
             var webrequest = (HttpWebRequest)System.Net.WebRequest.Create(url);
@@ -24,11 +24,11 @@ namespace bertoni_miniproject.Services
             using (var reader = new StreamReader(response.GetResponseStream()))
             {
                 var result = reader.ReadToEnd();
-                return JsonConvert.DeserializeObject<List<Album>>(result);
+                return JsonConvert.DeserializeObject<List<AlbumDto>>(result);
 
             }
         }
-        public List<Photo> GetPhotos(int albumId)
+        public List<PhotoDto> GetPhotos(int albumId)
         {
             string url = Host + ConfigurationManager.AppSettings["Photos"]; ;
             var webrequest = (HttpWebRequest)System.Net.WebRequest.Create(url);
@@ -37,11 +37,11 @@ namespace bertoni_miniproject.Services
             using (var reader = new StreamReader(response.GetResponseStream()))
             {
                 var result = reader.ReadToEnd();
-                return (JsonConvert.DeserializeObject<List<Photo>>(result)).FindAll(x=>x.AlbumId == albumId);
+                return (JsonConvert.DeserializeObject<List<PhotoDto>>(result)).FindAll(x=>x.AlbumId == albumId);
 
             }
         }
-        public List<Comment> GetComments(int photoId)
+        public List<CommentDto> GetComments(int photoId)
         {
             string url = Host + ConfigurationManager.AppSettings["Comments"]; ;
             var webrequest = (HttpWebRequest)System.Net.WebRequest.Create(url);
@@ -50,7 +50,7 @@ namespace bertoni_miniproject.Services
             using (var reader = new StreamReader(response.GetResponseStream()))
             {
                 var result = reader.ReadToEnd();
-                return (JsonConvert.DeserializeObject<List<Comment>>(result)).FindAll(x => x.PostId == photoId);
+                return (JsonConvert.DeserializeObject<List<CommentDto>>(result)).FindAll(x => x.PostId == photoId);
 
             }
         }

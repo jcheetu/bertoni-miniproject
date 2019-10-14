@@ -128,15 +128,14 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\UnityConfig.cs" />
     <Compile Include="Controllers\PhotoAlbumController.cs" />
-    <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\IPhotoAlbumService.cs" />
-    <Compile Include="Services\PhotoAlbum\Dto\Comment.cs" />
-    <Compile Include="Services\PhotoAlbum\Dto\Photo.cs" />
-    <Compile Include="Services\PhotoAlbum\Dto\Album.cs" />
+    <Compile Include="Services\PhotoAlbum\Dto\CommentDto.cs" />
+    <Compile Include="Services\PhotoAlbum\Dto\PhotoDto.cs" />
+    <Compile Include="Services\PhotoAlbum\Dto\AlbumDto.cs" />
     <Compile Include="Services\PhotoAlbum\PhotoAlbumService.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -172,10 +171,7 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\PhotoAlbum\Album.cshtml" />
+    <Content Include="Views\PhotoAlbum\Albums.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
